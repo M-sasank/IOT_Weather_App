@@ -1,19 +1,22 @@
 import datetime
 
 
+# get current date after adding 9:30 hours
 def current_date():
-    current_time = datetime.datetime.now().strftime("%d %b %Y")
-    return current_time
+    current_date = datetime.datetime.now() + datetime.timedelta(hours=9, minutes=30)
+    return current_date.strftime("%d %B %Y")
 
 
+# get current day after adding 9:30 hours
 def current_day():
-    current_day = datetime.datetime.now().strftime("%A")
-    return current_day
+    current_day = datetime.datetime.now() + datetime.timedelta(hours=9, minutes=30)
+    return current_day.strftime("%A")
 
 
-# function to give an array of times of the next 4 hours as 2:00 AM Format in an increment of 2 hours
+# function to give an array of times of the next 4 hours as 2:00 AM Format in an increment of 2 hours after adding 9:30 hours initially
 def next_4_hours():
     next_4_hours = []
-    for i in range(0, 9, 2):
-        next_4_hours.append((datetime.datetime.now() + datetime.timedelta(hours=i)).strftime("%I:00 %p"))
+    current_time = datetime.datetime.now() + datetime.timedelta(hours=9, minutes=30)
+    for i in range(5):
+        next_4_hours.append((current_time + datetime.timedelta(hours=2 * i)).strftime("%I:00 %p"))
     return next_4_hours
