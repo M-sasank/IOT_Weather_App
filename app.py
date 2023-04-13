@@ -43,17 +43,19 @@ def message():
     # print(current_time)
     print(model(temp_humidity, current_time))
     current = (temp_humidity[-1][1], temp_humidity[-1][2])
-    hour1 = model(temp_humidity, current_time + 7200)
+    n_hours = 4
+    hour1 = model(temp_humidity, current_time + 3600 * n_hours)
     # round to 1 decimal place
     hour1 = (round(hour1[0], 1), round(hour1[1], 1))
-    hour2 = model(temp_humidity, current_time + 7200 + 7200)
+    hour2 = model(temp_humidity, current_time + 3600 * n_hours*2)
     hour2 = (round(hour2[0], 1), round(hour2[1], 1))
-    hour3 = model(temp_humidity, current_time + 7200 + 7200 + 7200)
+    hour3 = model(temp_humidity, current_time + 3600 + n_hours*3)
     hour3 = (round(hour3[0], 1), round(hour3[1], 1))
-    hour4 = model(temp_humidity, current_time + 7200 + 7200 + 7200 + 7200)
+    hour4 = model(temp_humidity, current_time + 3600 * n_hours*4)
     hour4 = (round(hour4[0], 1), round(hour4[1], 1))
 
     preds = [current, hour1, hour2, hour3, hour4]
+
     return render_template('index.html', preds = preds, current_day = current_day(), current_date = current_date(), next = next_4_hours())
 
 
